@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Default Database</Title>
+            <Author>None</Author>
+            <Description>Default Database</Description>
+            <Shortcut>defDb</Shortcut>
+        			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+				<SnippetType>SurroundsWith</SnippetType>
+			</SnippetTypes>
+        </Header>
+        <Snippet>
+            <Code Language="CSharp">
+                <![CDATA[public class $name$DbContext : DbContext
+    {
+        public $name$DbContext(DbContextOptions<$name$DbContext> options)
+    : base(options)
+        {
+        }
+
+    //  public DbSet<$nameModel$> $nameModel$s { get; set; } 
+    }]]>
+            </Code>
+        <Declarations>
+            <Literal>
+                <ID>name</ID>
+                <Default>Application</Default>
+                <TollTip>Name Database</TollTip>
+            </Literal>
+            <Literal>
+                <ID>nameModel</ID>
+                <Default></Default>
+                <TollTip>Model name</TollTip>
+            </Literal>
+        </Declarations>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Create function</Title>
+            <Author>None</Author>
+            <Description>Create function</Description>
+            <Shortcut>fn</Shortcut>
+        			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+				<SnippetType>SurroundsWith</SnippetType>
+			</SnippetTypes>
+        </Header>
+        <Snippet>
+            <Code Language="CSharp">
+                <![CDATA[$FunType$ $FunClass$ $FunName$($FunProp$)
+        {
+            $selected$ $end$
+            return;
+        }]]>
+            </Code>
+        <Declarations>
+            <Literal>
+                <ID>FunType</ID>
+                <Default>public</Default>
+                <TollTip>Function type</TollTip>
+            </Literal>
+            <Literal>
+                <ID>FunClass</ID>
+                <Default>void</Default>
+                <TollTip>Function class</TollTip>
+            </Literal>
+            <Literal>
+                <ID>FunName</ID>
+                <Default>Function</Default>
+                <TollTip>Function name</TollTip>
+            </Literal>
+            <Literal>
+                <ID>FunProp</ID>
+                <Default></Default>
+                <TollTip>Function properties</TollTip>
+            </Literal>
+        </Declarations>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>
