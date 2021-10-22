@@ -30,6 +30,14 @@
 
             return new JwtSecurityTokenHandler().WriteToken(securityToken);
         }
+
+        // Example
+        //    var jwt = _jwtService.Generate(user.Id);
+
+        //    Response.Cookies.Append("jwt", jwt, new CookieOptions
+        //    {
+        //       HttpOnly = true
+        //    });
     }]]>
             </Code>
         <Declarations>
