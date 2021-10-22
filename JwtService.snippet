@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>JwtService</Title>
+            <Author>None</Author>
+            <Description>Create JwtService</Description>
+            <Shortcut>JwtSer</Shortcut>
+        	<SnippetTypes>
+			    <SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+        </Header>
+        <Snippet>
+            <Code Language="CSharp">
+                <![CDATA[public class JwtService
+    {
+        private string securityKey = "";
+
+        public string Generate(int id)
+        {
+            var symmetrycSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(securityKey));
+            ///
+            var credentials = new SigningCredentials(symmetrycSecurityKey, SecurityAlgorithms.HmacSha256Signature);
+            ///
+            var header = new JwtHeader(credentials);
+            ///
+            var payload = new JwtPayload(id.ToString(), null, null, null, DateTime.Today.AddDays(1));
+            ///
+            var securityToken = new JwtSecurityToken(header, payload);
+
+            return new JwtSecurityTokenHandler().WriteToken(securityToken);
+        }
+    }]]>
+            </Code>
+        <Declarations>
+            <Literal>
+                <ID>securityKey</ID>
+                <Default></Default>
+                <TollTip>Key for hash</TollTip>
+            </Literal>
+        </Declarations>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>
