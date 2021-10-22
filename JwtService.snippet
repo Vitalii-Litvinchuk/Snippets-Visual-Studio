@@ -15,7 +15,7 @@
                 <![CDATA[public class JwtService
     {
         private string securityKey = "";
-
+        // Visual studio => need to install System.IdentityModel.Tokens.Jwt
         public string Generate(int id)
         {
             var symmetrycSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(securityKey));
