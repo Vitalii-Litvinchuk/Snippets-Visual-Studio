@@ -31,13 +31,34 @@
             return new JwtSecurityTokenHandler().WriteToken(securityToken);
         }
 
-        // Example
+        public JwtSecurityToken Verify(string jwt)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            ///
+            var keyEncoding = Encoding.ASCII.GetBytes(securityKey);
+            ///
+            tokenHandler.ValidateToken(jwt, new TokenValidationParameters
+            {
+                IssuerSigningKey = new SymmetricSecurityKey(keyEncoding),
+            ValidateIssuerSigningKey = true,
+            ValidateIssuer = false,
+            ValidateAudience = false
+            }, out SecurityToken validateToken);
+            ///
+            return (JwtSecurityToken)validateToken;
+        }
+        // Example Generate
         //    var jwt = _jwtService.Generate(user.Id);
-
         //    Response.Cookies.Append("jwt", jwt, new CookieOptions
         //    {
         //       HttpOnly = true
         //    });
+
+        // Example verify
+        //    jwt = Request.Cookies["jwt"];
+        //    var token = _jwtService.Verify(jwt);
+        //    var userId = int.Parse(token.Issuer);
+        //    var user = _userRepository.GetUserById(userId);
     }]]>
             </Code>
         <Declarations>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>ErrorHandlerMiddleware</Title>
+            <Author>None</Author>
+            <Description></Description>
+            <Shortcut>initexceptionmiddleware</Shortcut>
+        	<SnippetTypes>
+			    <SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+        </Header>
+        <Snippet>
+            <Code Language="CSharp">
+                <![CDATA[
+    public class ErrorHandlerMiddleware
+    {
+        private readonly RequestDelegate _next;
+
+        public ErrorHandlerMiddleware(RequestDelegate next)
+        {
+            _next = next;
+        }
+
+        public async Task Invoke(HttpContext context)
+        {
+            try
+            {
+                await _next(context);
+            }
+            catch (Exception error)
+            {
+                var response = context.Response;
+                response.ContentType = "application/json";
+
+                switch (error)
+                {
+                    case AppException e:
+                        // custom application error
+                        response.StatusCode = (int)HttpStatusCode.BadRequest;
+                        break;
+                    case KeyNotFoundException e:
+                        // not found error
+                        response.StatusCode = (int)HttpStatusCode.NotFound;
+                        break;
+                    default:
+                        // unhandled error
+                        response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                        break;
+                }
+
+                //var result = JsonSerializer.Serialize(new { message = error?.Message });
+                //await response.WriteAsync(result);
+
+                await response.WriteAsJsonAsync(new { errors = new { global = error.Message } });
+            }
+        }
+    }
+    ]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>
